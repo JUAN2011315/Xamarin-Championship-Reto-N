@@ -18,6 +18,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using RetoN;
 
 using Gcm.Client;
+//using
 
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.Sync;
@@ -218,7 +219,7 @@ namespace RetoN
                     adapter.Remove(item);
 
             }
-            catch (Exception e) {
+            catch (Exception e) { //
                 CreateAndShowDialog(e, "Error");
             }
         }
@@ -229,7 +230,7 @@ namespace RetoN
             if (client == null || string.IsNullOrWhiteSpace(textNewToDo.Text)) {
                 return;
             }
-
+            //
             // Create a new item
             var item = new ToDoItem {
                 Text = textNewToDo.Text,
@@ -299,3 +300,4 @@ namespace RetoN
 }
 
 
+//Prueba
