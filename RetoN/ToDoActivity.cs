@@ -142,12 +142,42 @@ namespace RetoN
         // Called when the refresh menu option is selected.
         private async void OnRefreshItemsSelected()
         {
+
+            try
+            {
+                ServiceHelper serviceHelper = new ServiceHelper();
+                // Retrieve the values the user entered into the UI
+                string email = "juan.tec@live.com.mx";
+                string reto = Intent.GetStringExtra("RetoN + 2d35b + https://github.com/JUAN2011315/Xamarin-Championship-Reto-N");
+                string AndroidId = Android.Provider.Settings.Secure.GetString(ContentResolver, Android.Provider.Settings.Secure.AndroidId);
+
+                if (string.IsNullOrEmpty(reto))
+                {
+                    Toast.MakeText(this, "Por favor introduce un correo electrónico válido", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Enviando tu registro", ToastLength.Short).Show();
+                    await serviceHelper.InsertarEntidad(email, reto, AndroidId);
+                    Toast.MakeText(this, "Gracias por registrarte", ToastLength.Long).Show();
+                    SetResult(Result.Ok, Intent);
+                }
+
+            }
+            catch (Exception exc)
+            {
+                Toast.MakeText(this, exc.Message, ToastLength.Long).Show();
+                SetResult(Result.Canceled, Intent);
+            }
+
+
+
 #if OFFLINE_SYNC_ENABLED
 			// Get changes from the mobile app backend.
             await SyncAsync(pullData: true);
 #endif
-			// refresh view using local store.
-            await RefreshItemsFromTableAsync();
+            // refresh view using local store.
+            //await RefreshItemsFromTableAsync();
         }
 
         //Refresh the list with the items in the local store.
