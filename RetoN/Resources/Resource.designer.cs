@@ -67,14 +67,17 @@ namespace RetoN
 			// aapt resource value: 0x7f070003
 			public const int buttonAddToDo = 2131165187;
 			
-			// aapt resource value: 0x7f070005
-			public const int checkToDoItem = 2131165189;
-			
 			// aapt resource value: 0x7f070004
-			public const int listViewToDo = 2131165188;
+			public const int buttonRegistro = 2131165188;
 			
 			// aapt resource value: 0x7f070006
-			public const int menu_refresh = 2131165190;
+			public const int checkToDoItem = 2131165190;
+			
+			// aapt resource value: 0x7f070005
+			public const int listViewToDo = 2131165189;
+			
+			// aapt resource value: 0x7f070007
+			public const int menu_refresh = 2131165191;
 			
 			// aapt resource value: 0x7f070002
 			public const int textNewToDo = 2131165186;

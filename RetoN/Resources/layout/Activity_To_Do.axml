@@ -39,6 +39,12 @@
             android:layout_height="wrap_content"
             android:onClick="AddItem"
             android:text="@string/add_button_text" />
+        <Button
+            android:id="@+id/buttonRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="AddRegistro"
+            android:text="Registro" />
     </LinearLayout>
     <ListView
         android:id="@+id/listViewToDo"

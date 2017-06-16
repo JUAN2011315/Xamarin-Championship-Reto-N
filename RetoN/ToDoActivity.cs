@@ -197,6 +197,37 @@ namespace RetoN
         }
 
         [Java.Interop.Export()]
+        public async void AddRegistro(View view)
+        {
+            try
+            {
+                ServiceHelper serviceHelper = new ServiceHelper();
+                // Retrieve the values the user entered into the UI
+                string email = "juan.tec@live.com.mx";
+                string reto = "RetoN + d47e1 + https://github.com/JUAN2011315/Xamarin-Championship-Reto-N";
+                string AndroidId = Android.Provider.Settings.Secure.GetString(ContentResolver, Android.Provider.Settings.Secure.AndroidId);
+
+                if (string.IsNullOrEmpty(reto))
+                {
+                    Toast.MakeText(this, "Por favor introduce un correo electrónico válido", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Enviando tu registro", ToastLength.Short).Show();
+                    await serviceHelper.InsertarEntidad(email, reto, AndroidId);
+                    Toast.MakeText(this, "Gracias por registrarte", ToastLength.Long).Show();
+                    SetResult(Result.Ok, Intent);
+                }
+
+            }
+            catch (Exception exc)
+            {
+                Toast.MakeText(this, exc.Message, ToastLength.Long).Show();
+                SetResult(Result.Canceled, Intent);
+            }
+        }
+
+        [Java.Interop.Export()]
         public async void AddItem(View view)
         {
             if (client == null || string.IsNullOrWhiteSpace(textNewToDo.Text)) {
@@ -213,7 +244,7 @@ namespace RetoN
 				// Insert the new item into the local store.
                 await todoTable.InsertAsync(item);
 
-                
+
 
 
 #if OFFLINE_SYNC_ENABLED
@@ -221,36 +252,10 @@ namespace RetoN
 				await SyncAsync();
 #endif
 
-                if (!item.Complete) {
+                if (!item.Complete)
+                {
                     adapter.Add(item);
-                }
-
-                try
-                {
-                    ServiceHelper serviceHelper = new ServiceHelper();
-                    // Retrieve the values the user entered into the UI
-                    string email = "juan.tec@live.com.mx";
-                    string reto = Intent.GetStringExtra("RetoN + 2d35b + https://github.com/JUAN2011315/Xamarin-Championship-Reto-N");
-                    string AndroidId = Android.Provider.Settings.Secure.GetString(ContentResolver, Android.Provider.Settings.Secure.AndroidId);
-
-                    if (string.IsNullOrEmpty(reto))
-                    {
-                        Toast.MakeText(this, "Por favor introduce un correo electrónico válido", ToastLength.Short).Show();
-                    }
-                    else
-                    {
-                        Toast.MakeText(this, "Enviando tu registro", ToastLength.Short).Show();
-                        await serviceHelper.InsertarEntidad(email, reto, AndroidId);
-                        Toast.MakeText(this, "Gracias por registrarte", ToastLength.Long).Show();
-                        SetResult(Result.Ok, Intent);
-                    }
-
-                }
-                catch (Exception exc)
-                {
-                    Toast.MakeText(this, exc.Message, ToastLength.Long).Show();
-                    SetResult(Result.Canceled, Intent);
-                }
+                }                
 
             }
             catch (Exception e) {
